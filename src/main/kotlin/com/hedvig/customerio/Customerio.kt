@@ -16,10 +16,10 @@ class Customerio(
     private val siteId:String,
     private val secretApiKey:String,
     private val objectMapper: ObjectMapper,
-    private val httpClient:OkHttpClient) {
+    private val httpClient:OkHttpClient) : CustomerioClient {
 
 
-    fun updateCustomer(id:String, data:Map<String,Any>) {
+    override fun updateCustomer(id:String, data:Map<String,Any>) {
 
         val json = objectMapper.writeValueAsString(data)
 
