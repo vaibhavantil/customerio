@@ -13,13 +13,13 @@ import okhttp3.RequestBody.Companion.toRequestBody
 const val baseURL = "https://track.customer.io/api"
 
 class Customerio(
-    private val siteId:String,
-    private val secretApiKey:String,
+    private val siteId: String,
+    private val secretApiKey: String,
     private val objectMapper: ObjectMapper,
-    private val httpClient:OkHttpClient) : CustomerioClient {
+    private val httpClient: OkHttpClient
+) : CustomerioClient {
 
-
-    override fun updateCustomer(id:String, data:Map<String,Any>) {
+    override fun updateCustomer(id: String, data: Map<String, Any?>) {
 
         val json = objectMapper.writeValueAsString(data)
 
@@ -32,8 +32,8 @@ class Customerio(
                 .addHeader("Authorization", Credentials.basic(siteId, secretApiKey))
                 .build()
 
-        httpClient.newCall(request = request).execute().use{
-            if(!it.isSuccessful) {
+        httpClient.newCall(request = request).execute().use {
+            if (!it.isSuccessful) {
                 throw RuntimeException("Could not update customer ${it.body.toString()}")
             }
         }
