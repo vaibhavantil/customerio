@@ -34,7 +34,7 @@ class Customerio(
 
         httpClient.newCall(request = request).execute().use {
             if (!it.isSuccessful) {
-                throw RuntimeException("Could not update customer ${it.body.toString()}")
+                throw RuntimeException("Could not update customer ${it.body}")
             }
         }
     }

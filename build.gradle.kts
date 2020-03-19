@@ -13,7 +13,7 @@ plugins {
     `java-library`
 }
 group = "com.hedvig.customerio"
-version = "0.4"
+version = "0.5"
 
 repositories {
     // Use jcenter for resolving dependencies.
@@ -59,7 +59,6 @@ val sourcesJar by tasks.registering(Jar::class) {
     classifier = "sources"
     from(sourceSets.main.get().allSource)
 }
-
 
 publishing {
     publications {

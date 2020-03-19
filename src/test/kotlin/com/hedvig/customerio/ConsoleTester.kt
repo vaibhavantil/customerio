@@ -5,10 +5,9 @@ import okhttp3.OkHttpClient
 
 fun main(args: Array<String>) {
 
-    for(l in args) {
+    for (l in args) {
         println(l)
     }
-
 
     val siteId = System.getenv("CUSTOMERIO_SITE_ID")
     val secretApiKey = System.getenv("CUSTOMERIO_SECRET_API_KEY")
