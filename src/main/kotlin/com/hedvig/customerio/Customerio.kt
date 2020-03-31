@@ -38,4 +38,19 @@ class Customerio(
             }
         }
     }
+
+    override fun deleteCustomer(id: String) {
+        val request =
+            Request.Builder()
+                .url("$baseURL/v1/customers/$id")
+                .delete()
+                .addHeader("Authorization", Credentials.basic(siteId, secretApiKey))
+                .build()
+
+        httpClient.newCall(request = request).execute().use {
+            if (!it.isSuccessful) {
+                throw RuntimeException("Could not update customer ${it.body}")
+            }
+        }
+    }
 }

@@ -17,7 +17,7 @@ fun main(args: Array<String>) {
     val okhttp = OkHttpClient()
     val client = Customerio(siteId, secretApiKey, objectMapper, okhttp)
 
-    client.updateCustomer("340415442", mapOf("test1" to "värde13", "test2" to null))
-
+    //client.updateCustomer("340415442", mapOf("test1" to "värde13", "test2" to null))
+    client.deleteCustomer("340415442")
     okhttp.connectionPool.evictAll()
 }
