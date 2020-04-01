@@ -53,4 +53,22 @@ class Customerio(
             }
         }
     }
+
+    override fun sendEvent(id: String, data: Map<String, Any?>) {
+        val json = objectMapper.writeValueAsString(data)
+        val requestBody = json.toRequestBody("application/json".toMediaType())
+
+        val request =
+            Request.Builder()
+                .url("$baseURL/v1/customers/$id/events")
+                .post(requestBody)
+                .addHeader("Authorization", Credentials.basic(siteId, secretApiKey))
+                .build()
+
+        httpClient.newCall(request = request).execute().use {
+            if (!it.isSuccessful) {
+                throw RuntimeException("Could not send event to customer ${it.body}")
+            }
+        }
+    }
 }

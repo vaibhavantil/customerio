@@ -13,7 +13,7 @@ plugins {
     `java-library`
 }
 group = "com.hedvig.customerio"
-version = "0.6"
+version = "0.7"
 
 repositories {
     // Use jcenter for resolving dependencies.
