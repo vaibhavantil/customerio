@@ -61,24 +61,20 @@ val sourcesJar by tasks.registering(Jar::class) {
 }
 
 publishing {
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/hedviginsurance/libs")
+            credentials {
+                username = project.findProperty("GITHUB_USER") as String? ?: System.getenv("GITHUB_USER")
+                password = project.findProperty("GITHUB_TOKEN") as String? ?: System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
     publications {
-        register("mavenJava", MavenPublication::class) {
+        register("gpr", MavenPublication::class) {
             from(components["java"])
-            artifact(sourcesJar.get())
         }
     }
 }
 
-bintray {
-    user = System.getenv("BINTRAY_USER")
-    key = System.getenv("BINTRAY_KEY")
-    publish = true
-    setPublications("mavenJava")
-    pkg(closureOf<com.jfrog.bintray.gradle.BintrayExtension.PackageConfig> {
-        repo = "hedvig-java"
-        name = "customerio"
-        userOrg = "hedvig"
-        vcsUrl = "https://github.com/HedvigInsurance/customerio.git"
-        setLicenses("MIT")
-    })
-}
